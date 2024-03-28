@@ -7,6 +7,7 @@ This is a rewrite of [Maarten Pennings firmware](https://github.com/maarten-penn
 - Easier web-based configuration
 - The brightness level of the LED display survives reboot
 - Got rid of everything that isn't just a basic clock
+- Ported to PlatformIO on VS-Code
 - General re-write to suit my own coding style
 
 ## Using the firmware
