@@ -4,7 +4,7 @@
 #include "debug.h"
 
 Preferences prefs;
-int8_t cfgBits = 0;
+int8_t cfgBits = 0; // The value of CFG_BOOL_CONFIGS
 
 /**
  * Initialise the stored configuration system
@@ -97,10 +97,9 @@ void setDSTConfig(DST_Transition value, bool start) {
  * Reset the entire configuration
  */
 void resetConfig() {
-    DEBUG("Resetting config and rebooting")
+    DEBUG("Resetting config")
     prefs.clear();
-    // TODO NEED TO GET ESP REBOOTING WORKING!
-    ESP.restart();
+    cfgBits = 0;
 }
 
 /**

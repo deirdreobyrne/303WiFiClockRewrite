@@ -105,7 +105,7 @@ void setColon(bool colon) {
 /**
  * Show characters on the display
  */
-void showLEDChars(uint8_t dig1, uint8_t dig2, uint8_t dig3, uint8_t dig4, bool colon) {
+void setLEDSegments(uint8_t dig1, uint8_t dig2, uint8_t dig3, uint8_t dig4, bool colon) {
   setDigit(0, dig1, false);
   setDigit(1, dig2, colon);
   setDigit(2, dig3, false);
@@ -115,8 +115,8 @@ void showLEDChars(uint8_t dig1, uint8_t dig2, uint8_t dig3, uint8_t dig4, bool c
 /**
  * Clear the display
  */
-void clearLEDChars() {
-  showLEDChars(LED_CHAR_SPACE, LED_CHAR_SPACE, LED_CHAR_SPACE, LED_CHAR_SPACE, false);
+void clearLEDSegments() {
+  setLEDSegments(LED_CHAR_SPACE, LED_CHAR_SPACE, LED_CHAR_SPACE, LED_CHAR_SPACE, false);
 }
 
 /**

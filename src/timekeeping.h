@@ -3,7 +3,5 @@
 
 void initTimekeeping();
 void timekeepingPoll();
-bool timeHasBeenInitialised();
-bool getHasTime();
 
 #endif

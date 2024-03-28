@@ -9,6 +9,9 @@
 
 AsyncWebServer server(80);
 
+/**
+ * Callback called when the main web page is requested
+ */
 void onRoot(AsyncWebServerRequest *request);
 
 /**
@@ -390,9 +393,6 @@ no daylight saving)</i><br>\n\
 </html>\n\
 ";
 
-/**
- * Callback called when the main web page is requested
- */
 void onRoot(AsyncWebServerRequest *request) {
     if (request->params() > 1) { // It was called with a new configuration
       DEBUG("Form submission received\n")
@@ -419,11 +419,7 @@ void onRoot(AsyncWebServerRequest *request) {
       } else {
         clearCfgBit(CFG_MASK_24H);
       }
-      request->send(200, "text/plain", "Rebooting...");
-      yield();
-      delay(100);
-      // TODO NEED TO GET ESP REBOOTING WORKING!
-      ESP.restart();
+      request->send(200, "text/plain", "Need to restart the clock!");
     } else {
       DEBUG("Sending home page\n")
       request->send_P(200, "text/html", homePageData, processor);

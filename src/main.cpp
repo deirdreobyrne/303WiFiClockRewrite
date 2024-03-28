@@ -30,7 +30,7 @@ void setup() {
   do { delay(500); } while (!Serial);
 #endif
   DEBUG("\n\nStarted - initialising LED\n")
-  initLED();
+  initRedLED();
   DEBUG("Init Config\n")
   initConfig();
   DEBUG("Init buttons\n")
@@ -38,7 +38,7 @@ void setup() {
   if (buttonPressed(DOWN_BUTTON_PIN)) resetConfig();
   DEBUG("Init display\n")
   initDisplay(getInt8Config(CFG_DEFAULT_BRIGHTNESS, LED_DEFAULT_BRIGHTNESS));
-  showLEDChars(LED_CHAR_b, LED_CHAR_o, LED_CHAR_o, LED_CHAR_t);
+  setLEDSegments(LED_CHAR_b, LED_CHAR_o, LED_CHAR_o, LED_CHAR_t);
   DEBUG("Init WiFi\n")
   initWiFi();
   DEBUG("Init Webserver\n")

@@ -15,8 +15,7 @@ const char *ntp3 = 0;
 
 /**
  * Generate the string that describes our timezone and DST change information
- */
-/*
+ *
  * Ref: https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
  * 
  * Format is
@@ -92,18 +91,14 @@ void displayTime(time_t now) {
  */
 void setTimeOfDayCB() {
     DEBUG("Set time of day being called\n")
-    hasTime = true;
-}
-bool timeHasBeenInitialised() {
-  return initialised;
-}
-
-bool getHasTime() {
-  return hasTime;
+    if (!hasTime) {
+        lastDisplayUpdate = time(0); // Start showing the time at the start of the next second
+        hasTime = true;
+    }
 }
 
+// The pointers to the server names must remain valid at all times
 void addNTPServer(const char *tag) {
-    // The pointers to the server names must remain valid at all times, apparently
     const char *server = getStringConfig(tag).c_str();
     char *storage;
     if (!(*server)) return;
@@ -123,7 +118,7 @@ void addNTPServer(const char *tag) {
  */
 void initTimekeeping() {
     DEBUG("Initialising the timekeeping system\n")
-    showLEDChars(LED_CHAR_S, LED_CHAR_y, LED_CHAR_n, LED_CHAR_C);
+    setLEDSegments(LED_CHAR_S, LED_CHAR_y, LED_CHAR_n, LED_CHAR_C);
     settimeofday_cb(setTimeOfDayCB);
     addNTPServer(CFG_NTP_SERVER_1);
     addNTPServer(CFG_NTP_SERVER_2);

@@ -15,10 +15,10 @@ void initAP() {
     IPAddress local_IP(192,168,200,1);
     IPAddress gateway(192,168,200,1);
     IPAddress subnet(255,255,255,0);
-    setLEDOn(); // indicates that we are a wifi access point
+    setRedLEDOn(); // indicates that we are a wifi access point
     WiFi.softAPConfig(local_IP, gateway, subnet);
     WiFi.softAP("303Clock");
-    showLEDChars(LED_CHAR_C, LED_CHAR_o, LED_CHAR_n, LED_CHAR_F);
+    setLEDSegments(LED_CHAR_C, LED_CHAR_o, LED_CHAR_n, LED_CHAR_F);
     softAP = true;
 }
 
@@ -40,12 +40,12 @@ void initWiFi() {
                 IPAddress addr = WiFi.localIP();
                 // Flash our IP address on the LED display
                 for (int j = 0 ; j < 4 ; j++) {
-                    clearLEDChars();
+                    clearLEDSegments();
                     delay(200);
                     showUInt8(addr[j]);
                     delay(1000);
                 }
-                clearLEDChars();
+                clearLEDSegments();
                 delay(200);
                 return;
             }
@@ -61,11 +61,14 @@ void initWiFi() {
 
 /**
  * Do we have a wifi connection to an access point?
+ * 
+ * This is called by timekeepingPoll() whenever the timekeeping system doesn't yet have the time from an NTP server
  */
 bool hasWiFiConnection() {
   if (softAP) {
     if (WiFi.isConnected()) {
       WiFi.enableAP(softAP = false);
+      setRedLEDOff();
       DEBUG("Disabling WiFi soft AP\n");
       return true;
     }

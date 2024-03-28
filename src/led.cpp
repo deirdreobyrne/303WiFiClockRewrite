@@ -8,21 +8,21 @@
 /**
  * Initialise the LED on the back of the display
  */
-void initLED() {
+void initRedLED() {
   pinMode(LED_PIN, OUTPUT);
-  setLEDOff(); 
+  setRedLEDOff(); 
 }
 
 /**
  * Set the LED on the back of the display on
  */
-void setLEDOn() {
+void setRedLEDOn() {
   digitalWrite(LED_PIN, LOW); // active low
 }
 
 /**
  * Set the LED on the back of the display off
  */
-void setLEDOff() {
+void setRedLEDOff() {
   digitalWrite(LED_PIN, HIGH); // active low
 }

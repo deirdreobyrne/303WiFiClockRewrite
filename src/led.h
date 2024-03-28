@@ -2,8 +2,8 @@
 #ifndef _LED_H_
 #define _LED_H_
 
-void initLED();
-void setLEDOn();
-void setLEDOff();
+void initRedLED();
+void setRedLEDOn();
+void setRedLEDOff();
 
 #endif

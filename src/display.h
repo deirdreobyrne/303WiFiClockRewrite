@@ -19,8 +19,8 @@ void setDisplayBrightness(int brightness);       // Sets brightness level 0 .. 7
 uint8_t getDisplayBrightness();
 void initDisplay(int brightness);
 void setColon(bool colon);
-void showLEDChars(uint8_t dig1, uint8_t dig2, uint8_t dig3, uint8_t dig4, bool colon = false);
-void clearLEDChars();
+void setLEDSegments(uint8_t dig1, uint8_t dig2, uint8_t dig3, uint8_t dig4, bool colon = false);
+void clearLEDSegments();
 void showTime(uint8_t h, uint8_t m);
 void showUInt8(uint8_t v);
 

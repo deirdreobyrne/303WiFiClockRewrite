@@ -11,7 +11,7 @@ uint8_t buttonsPressedMask = 0;
 uint64_t lastButtonScan = 0UL;
 
 /**
- * Low level is a button pressed check
+ * Low level "is a button pressed" check
  */
 bool buttonPressed(uint8_t button) {
     if (button == DOWN_BUTTON_PIN) {
@@ -20,6 +20,12 @@ bool buttonPressed(uint8_t button) {
     return !digitalRead(button);
 }
 
+/**
+ * Check a button state
+ * mask is the button's mask in buttonsPressedMask
+ * debounceState is one of the ...ButtonDebounce variables
+ * cb is the button's callback function
+ */
 void checkButton(uint8_t mask, uint8_t debounceState, void (*cb)(void)) {
     if (debounceState) {                    // Button has been pressed within at least the last 8 x BUTTON_SCAN_MILLIS
         if (!(buttonsPressedMask & mask)) { // If we have not already recorded that the button was pressed
