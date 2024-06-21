@@ -141,7 +141,7 @@ void timekeepingPoll() {
         if (!initialised) {
             initTimekeeping();
         } else {
-            if ((millis() - hasTimeCheck) >= 60000L) {
+            if ((millis() - hasTimeCheck) >= 60000UL) {
                 hasTimeCheck = millis();
                 sntp_stop();
                 sntp_init();
