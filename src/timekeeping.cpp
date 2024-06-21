@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <sntp.h>
 #include "timekeeping.h"
 #include "config.h"
 #include "display.h"
@@ -9,6 +10,7 @@ static unsigned long lastUpdateMillis = 0;
 static bool colon = false;
 static bool initialised = false;
 static volatile bool hasTime = false;
+static unsigned long hasTimeCheck = 0;
 const char *ntp1 = 0;
 const char *ntp2 = 0;
 const char *ntp3 = 0;
@@ -125,6 +127,7 @@ void initTimekeeping() {
     addNTPServer(CFG_NTP_SERVER_3);
     configTime(getTimezoneString().c_str(), ntp1, ntp2, ntp3);
     initialised = true;
+    hasTimeCheck = millis();
 }
 
 /**
@@ -134,8 +137,16 @@ void timekeepingPoll() {
     unsigned long timeSinceUpdateMillis;
 
     if (!hasTime) {
-      if ((!initialised) && (hasWiFiConnection())) {
-        initTimekeeping();
+      if (hasWiFiConnection()) {
+        if (!initialised) {
+            initTimekeeping();
+        } else {
+            if ((millis() - hasTimeCheck) >= 60000L) {
+                hasTimeCheck = millis();
+                sntp_stop();
+                sntp_init();
+            }
+        }
       }
       return;
     }
