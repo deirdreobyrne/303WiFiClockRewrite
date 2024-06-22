@@ -8,6 +8,7 @@
 #include "webserver.h"
 #include "wifi.h"
 #include "debug.h"
+#include "ota.h"
 
 // Callback for when the "UP" button is pressed
 void upPressedCB() {
@@ -48,5 +49,6 @@ void setup() {
 void loop() {
   timekeepingPoll(); // This will initialise the timekeeping if/when we have a WiFi connection
   buttonScan();
-  delay(20);
+  otaPoll();
+  delay(10);
 }
